@@ -1,14 +1,7 @@
 <?php
-/*
-{"name":"Selma Kohnic", "personal_id":"960309", "address":"Hantverkaregatan 14", "zip_code":"38244", "city":"Nybro", "email":"seko1800@student.miun.se", "phone":"0725554611"}
-{"duration":"", "company":"", "role":"", "description":""}
-{"duration":"", "name":"", "type":"", "description":""}
-{"title":"", "url":"", "description":"", "image":""}
-*/
-
 //Skickar return header-information
 header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Origin: *"); //http://studenter.miun.se/~seko1800/dt173g
 header('Access-Control-Allow-Methods: POST, GET, DELETE, PUT');
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, X-Requested-With");
 
@@ -18,7 +11,7 @@ include("includes/config.php");
 //Laddar automatiskt in samtliga klasser som används
 spl_autoload_register(function ($class) {
     include 'classes/' . $class . '.class.php';
-    });
+});
 
 //HTTP-metod, path och input av förfrågning
 $method = $_SERVER['REQUEST_METHOD'];
@@ -44,13 +37,10 @@ if ($request[0] == "about") {
 			echo json_encode($user->getUserInfo(), JSON_PRETTY_PRINT);
 			break;
 		case "PUT":
-			//Kontrollerar om användaren är inloggad
-			//if($user->loginUser($username, $password)) {
-				//Uppdaterar personuppgifterna
-				if (isset($input["name"]) && isset($input["address"]) && isset($input["zip_code"]) && isset($input["city"]) && isset($input["email"]) && isset($input["phone"])) {
-					$user->updateUserInfo($name, $address, $zip_code, $city, $email, $phone);
-				}
-			//}
+			//Uppdaterar personuppgifterna
+			if (isset($input["name"]) && isset($input["address"]) && isset($input["zip_code"]) && isset($input["city"]) && isset($input["email"]) && isset($input["phone"])) {
+				$user->updateUserInfo($name, $address, $zip_code, $city, $email, $phone);
+			}
 			break;
 	}
 
@@ -102,31 +92,22 @@ else if ($request[0] == "jobs") {
 			}
 			break;
 		case "PUT":
-			//Kontrollerar om användaren är inloggad
-			//if($user->loginUser($username, $password)) {
-				//Uppdaterar ett jobb
-				if (isset($input["duration"]) && isset($input["company"]) && isset($input["role"]) && isset($input["description"])) {
-					$job->updateJob($id, $duration, $company, $role, $description);
-				}
-			//}
+			//Uppdaterar ett jobb
+			if (isset($input["duration"]) && isset($input["company"]) && isset($input["role"]) && isset($input["description"])) {
+				$job->updateJob($id, $duration, $company, $role, $description);
+			}
 			break;
 		case "POST":
-			//Kontrollerar om användaren är inloggad
-			//if($user->loginUser($username, $password)) {
-				//Lägger till ett jobb
-				if (isset($input["duration"]) && isset($input["company"]) && isset($input["role"]) && isset($input["description"])) {
-					$job->addJob($duration, $company, $role, $description);
-				}
-			//}
+			//Lägger till ett jobb
+			if (isset($input["duration"]) && isset($input["company"]) && isset($input["role"]) && isset($input["description"])) {
+				$job->addJob($duration, $company, $role, $description);
+			}
 			break;
 		case "DELETE":
-			//Kontrollerar om användaren är inloggad
-			//if($user->loginUser($username, $password)) {
-				//Raderar ett jobb
-				if(isset($id)) {
-					$job->deleteJob($id);
-				}
-			//}
+			//Raderar ett jobb
+			if(isset($id)) {
+				$job->deleteJob($id);
+			}
 			break;
 	}
 
@@ -175,31 +156,22 @@ else if ($request[0] == "educations") {
 			}
 			break;
 		case "PUT":
-			//Kontrollerar om användaren är inloggad
-			//if($user->loginUser($username, $password)) {
-				//Uppdaterar en utbildning
-				if (isset($input["duration"]) && isset($input["name"]) && isset($input["type"]) && isset($input["description"])) {
-					$education->updateEducation($id, $duration, $name, $type, $description);
-				}
-			//}
+			//Uppdaterar en utbildning
+			if (isset($input["duration"]) && isset($input["name"]) && isset($input["type"]) && isset($input["description"])) {
+				$education->updateEducation($id, $duration, $name, $type, $description);
+			}
 			break;
 		case "POST":
-			//Kontrollerar om användaren är inloggad
-			//if($user->loginUser($username, $password)) {
-				//Lägger till en utbildning
-				if (isset($input["duration"]) && isset($input["name"]) && isset($input["type"]) && isset($input["description"])) {
-					$education->addEducation($duration, $name, $type, $description);
-				}
-			//}
+			//Lägger till en utbildning
+			if (isset($input["duration"]) && isset($input["name"]) && isset($input["type"]) && isset($input["description"])) {
+				$education->addEducation($duration, $name, $type, $description);
+			}
 			break;
 		case "DELETE":
-			//Kontrollerar om användaren är inloggad
-			//if($user->loginUser($username, $password)) {
-				//Raderar en utbildning
-				if(isset($id)) {
-					$education->deleteEducation($id);
-				}
-			//}
+			//Raderar en utbildning
+			if(isset($id)) {
+				$education->deleteEducation($id);
+			}
 			break;
 	}
 
@@ -248,31 +220,22 @@ else if ($request[0] == "websites") {
 			}
 			break;
 		case "PUT":
-			//Kontrollerar om användaren är inloggad
-			//if($user->loginUser($username, $password)) {
 			//Uppdaterar en webbplats
-				if (isset($input["title"]) && isset($input["url"]) && isset($input["description"]) && isset($input["image"])) {
-					$website->updateWebsite($id, $title, $url, $description, $image);
-				}
-			//}
+			if (isset($input["title"]) && isset($input["url"]) && isset($input["description"]) && isset($input["image"])) {
+				$website->updateWebsite($id, $title, $url, $description, $image);
+			}
 			break;
 		case "POST":
-			//Kontrollerar om användaren är inloggad
-			//if($user->loginUser($username, $password)) {
-				//Lägger till en webbplats
-				if (isset($input["title"]) && isset($input["url"]) && isset($input["description"]) && isset($input["image"])) {
-					$website->addWebsite($title, $url, $description, $image);
-				}
-			//}
+			//Lägger till en webbplats
+			if (isset($input["title"]) && isset($input["url"]) && isset($input["description"]) && isset($input["image"])) {
+				$website->addWebsite($title, $url, $description, $image);
+			}
 			break;
 		case "DELETE":
-			//Kontrollerar om användaren är inloggad
-			//if($user->loginUser($username, $password)) {
-				//Raderar en utbildning
-				if(isset($id)) {
-					$website->deleteWebsite($id);
-				}
-			//}
+			//Raderar en utbildning
+			if(isset($id)) {
+				$website->deleteWebsite($id);
+			}
 			break;
 	}
 

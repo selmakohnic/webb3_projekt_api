@@ -17,7 +17,7 @@ class WebsitesRegister {
     //Hämtar alla webbplatser
     function getWebsites() {
         //SQL-fråga för att hämta alla webbplatser
-        $sql = "SELECT * FROM cv_websites";
+        $sql = "SELECT * FROM cv_websites order by id DESC";
         $result = $this->db->query($sql);                    
  
         //Retunerar resultatet som en array
